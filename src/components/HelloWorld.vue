@@ -91,6 +91,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-12 p-0 mt-3">
+                      <li class="nav-item nav-link dropdown">
+                            <a style="color: black; text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" href="#">Return
+                            <span class="caret"></span></a>
+                            
+                        </li>
+                        <li class="nav-item nav-link dropdown">
+                            <a style="color: black; text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" href="#">Econonmy, 1 Adult
+                            <span class="caret"></span></a>
+                            
+                        </li>
+                       
+                    </div>
                     
                 </div>
                 <div class="row mt-5 text-light" style="background-color: #005E64; height: auto; border-radius: 3px">
@@ -116,7 +130,7 @@
             </div>
             <div class="col-lg-4">
 
-              <img src="https://media.istockphoto.com/photos/tropical-island-picture-id157484556?k=20&m=157484556&s=612x612&w=0&h=m1rYX4iMPX-V0d0gPo1OEo5pCOlROiY5SF8t8TXr9NY=" class="img-fluid">
+              <img style="height: 100%; width: 100%" src="https://media.istockphoto.com/photos/tropical-island-picture-id157484556?k=20&m=157484556&s=612x612&w=0&h=m1rYX4iMPX-V0d0gPo1OEo5pCOlROiY5SF8t8TXr9NY=" class="img-fluid">
                 
             </div>
         </div>
