@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #F2F2F2; height: auto">
+  <div style="background-color: #E6E7E9; height: auto">
 
     <header>
 
@@ -56,7 +56,7 @@
         <h3 style="margin-top: 80px; padding: 0">Ready for your next trip? Book with us now.</h3>
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8 mb-3">
                 
                 
                 <div class="row bg-light p-4" style="height: auto">
@@ -66,18 +66,18 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="row" style="box-shadow: 5px 10px 18px #888888;">
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <p>Leaving from</p>
                                 <h1>{{leavingIata}}</h1>
                                 <h4>{{leavingCity}}</h4>
                             </div>
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
 
                                 <p>Going to</p>
                                 <h1>{{destinationIata}}</h1>
                                 <h4>{{destinationCity}}</h4>
                             </div>
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#datePickerModal">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#datePickerModal">
 
                                 <p>Departing on</p>
                                 <h6>{{dates.in}}</h6>
@@ -85,11 +85,9 @@
                                 <p>Returning on</p>
                                 <h6>{{dates.out}}</h6>
                             </div>
-                            <div style="height: 200px" @click="fetchWeatherData" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#weatherModal">
+                            <div style="height: 200px; background-color: #005E64;" @click="fetchWeatherData" class="col-lg-3 border border-right-primary p-4 d-flex flex-column align-items-center justify-content-center text-light" data-bs-toggle="modal" data-bs-target="#weatherModal">
 
-                                <p>Leaving from</p>
-                                <h1>HKG</h1>
-                                <h4>Hong Kong</h4>
+                                <h4>Search flights</h4>
                             </div>
                         </div>
                     </div>
@@ -117,6 +115,8 @@
                 </div>
             </div>
             <div class="col-lg-4">
+
+              <img src="https://media.istockphoto.com/photos/tropical-island-picture-id157484556?k=20&m=157484556&s=612x612&w=0&h=m1rYX4iMPX-V0d0gPo1OEo5pCOlROiY5SF8t8TXr9NY=" class="img-fluid">
                 
             </div>
         </div>
@@ -556,15 +556,15 @@ export default {
       destCountryName: '',
       leavingName: "",
       destinationName: '',
-      leavingCity: '',
-      destinationCity: '',
-      leavingIata: '',
-      destinationIata: '',
+      leavingCity: 'Select',
+      destinationCity: 'Select',
+      leavingIata: 'SELECT',
+      destinationIata: 'SELECT',
       airportLeavingData: [],
       airportDestinationData: [],
       dates: {
-        in: null,
-        out: null
+        in: 'Select',
+        out: 'Select'
       },
       destinationDate: '',
       fetchedWeatherData: [],
