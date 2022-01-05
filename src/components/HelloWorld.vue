@@ -95,19 +95,24 @@
                     </div>
                     
                 </div>
-                <div class="row mt-5" style="background-color: #005E64; height: auto; border-radius: 3px">
-                    <div class="col-lg-3" style="background-color: red; height: 100px">
+                <div class="row mt-5 text-light" style="background-color: #005E64; height: auto; border-radius: 3px">
+                    <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center border-end" style="padding: 10px;">
+                      <i class="bi bi-list-ul" style="font-size: 40px"></i>
+                      <p>Manage Booking</p>
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center border-end" style="padding: 10px">
+                      <i class="bi bi-check-circle" style="font-size: 40px;"></i>
+                      
+                      <p>Check in</p> 
+                    </div>
+                    <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center border-end" style="padding: 10px;">
+                      <i class="bi bi-arrow-left-right" style="font-size: 40px;"></i>
+                      <p style="display: block">Rebook and refund</p>
+                    </div>
 
-                    </div>
-                    <div class="col-lg-3" style="background-color: green; height: 100px">
-                        
-                    </div>
-                    <div class="col-lg-3" style="background-color: blue; height: 100px">
-                        
-                    </div>
-
-                    <div class="col-lg-3" style="background-color: aqua; height: 100px">
-                        
+                    <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center" style="padding: 10px">
+                      <i class="bi bi-bell" style="font-size: 40px"></i>
+                      <p>COVID-19 updates</p> 
                     </div>
                 </div>
             </div>
