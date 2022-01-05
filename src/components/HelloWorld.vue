@@ -51,9 +51,9 @@
     </header>
 
 
-    <section style="padding: 20px">
+    <section style="padding: 20px;">
 
-        <h3 style="margin-top: 80px;">Ready for your next trip? Book with us now.</h3>
+        <h3 style="margin-top: 80px; padding: 0">Ready for your next trip? Book with us now.</h3>
 
         <div class="row">
             <div class="col-lg-8">
@@ -61,23 +61,23 @@
                 
                 <div class="row bg-light p-4" style="height: auto">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 p-0 mb-3">
                         <label style="color: #6EA1B3">Redeem Flights</label><label style="margin-left: 40px; color: #6EA1B3">Multi-city / stopover</label> 
                     </div>
                     <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-3 border border-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <div class="row" style="box-shadow: 5px 10px 18px #888888;">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <p>Leaving from</p>
                                 <h1>{{leavingIata}}</h1>
                                 <h4>{{leavingCity}}</h4>
                             </div>
-                            <div class="col-lg-3 border border-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#myModal">
 
                                 <p>Going to</p>
                                 <h1>{{destinationIata}}</h1>
                                 <h4>{{destinationCity}}</h4>
                             </div>
-                            <div class="col-lg-3 border border-primary p-2" data-bs-toggle="modal" data-bs-target="#datePickerModal">
+                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#datePickerModal">
 
                                 <p>Departing on</p>
                                 <h6>{{dates.in}}</h6>
@@ -85,7 +85,7 @@
                                 <p>Returning on</p>
                                 <h6>{{dates.out}}</h6>
                             </div>
-                            <div class="col-lg-3 border border-primary p-2">
+                            <div style="height: 200px" @click="fetchWeatherData" class="col-lg-3 border border-right-primary p-2" data-bs-toggle="modal" data-bs-target="#weatherModal">
 
                                 <p>Leaving from</p>
                                 <h1>HKG</h1>
@@ -187,6 +187,342 @@
     </div>
   </div>
 
+  <div class="modal fade" id="weatherModal"> 
+    <div class="modal-dialog" style="max-width: 99%;" role="document">
+      <div class="modal-content ml-0">
+
+        <div class="modal-header">
+            <p>Select departing flight</p>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+            <p>{{leavingCity}} to {{destinationCity}}</p>
+
+            <div class="row">
+              <div class="col-lg-6" style="border-right: 1px black solid">
+
+                <div class="row" style="border-right: 1px black solid">
+
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h5 class="mb-1">Morning</h5>
+                              <h3 class="mb-1 mt-3">{{leftTemp1}} °C</h3>
+                              <i class="bi bi-sun" style="color: #868B94; font-size: 50px"></i>
+                            
+                            </div>
+
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h5 class="mb-1">Afternoon</h5>
+                              <h3 class="mb-1 mt-3">{{leftTemp2}} °C</h3>
+                              <i class="bi bi-cloud" style="color: #868B94; font-size: 50px"></i>
+                            
+                            </div>
+
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0" >
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h5 class="mb-1">Evening</h5>
+                              <h3 class="mb-1 mt-3">{{leftTemp3}} °C</h3>
+                              <i class="bi bi-moon" style="color: #868B94; font-size: 50px"></i>
+                            
+                            </div>
+
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h5 class="mb-1">Overnight</h5>
+                              <h3 class="mb-1 mt-3">{{leftTemp4}} °C</h3>
+                              <i class="bi bi-moon" style="color: #868B94; font-size: 50px"></i>
+                            
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-lg-6">
+
+                <div class="row">
+
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            <div class="d-flex">
+                              <h6 class="flex-grow-1">12:00 am</h6>
+                              <h6>6:00 am</h6>
+                            </div>
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h2 class="mb-1">London</h2>
+                              <h5 class="mb-4">2021-12-26</h5>
+                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
+                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
+                            
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                              <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
+                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
+                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
+                              </div>
+                              <div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            <div class="d-flex">
+                              <h6 class="flex-grow-1">12:00 am</h6>
+                              <h6>6:00 am</h6>
+                            </div>
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h2 class="mb-1">London</h2>
+                              <h5 class="mb-4">2021-12-26</h5>
+                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
+                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
+                            
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                              <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
+                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
+                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
+                              </div>
+                              <div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0" >
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            <div class="d-flex">
+                              <h6 class="flex-grow-1">12:00 am</h6>
+                              <h6>6:00 am</h6>
+                            </div>
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h2 class="mb-1">London</h2>
+                              <h5 class="mb-4">2021-12-26</h5>
+                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
+                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
+                            
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                              <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
+                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
+                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
+                              </div>
+                              <div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                  <div  class="col-lg-3 bg-danger p-0">
+
+                    <section class="h-auto">
+                      <div class="">
+                        <div class="card" style="color: #4B515D;">
+                          <div class="card-body">
+                            <div class="d-flex">
+                              <h6 class="flex-grow-1">12:00 am</h6>
+                              <h6>6:00 am</h6>
+                            </div>
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                              <h2 class="mb-1">London</h2>
+                              <h5 class="mb-4">2021-12-26</h5>
+                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
+                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
+                            
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                              <div class="flex-grow-1" style="font-size: 1rem;">
+                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
+                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
+                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
+                              </div>
+                              <div>
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                  </div>
+                </div>
+
+              </div>
+              
+            </div>
+
+            <div class="row p-3 mt-5 bg-secondary">
+
+              <div class="col-lg-12 p-0">
+                <p>Sort by</p>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-lg-6">
+
+                    <div class="row">
+                      <div class="col-lg-12 p-0">
+                        <p>5 flights found</p>
+                      </div>
+                      <div class="col-lg-12 bg-light p-3 mb-2">
+                        
+                      </div>
+                      <div class="col-lg-12 bg-light p-3 mb-2">
+                        
+                      </div>
+                      <div class="col-lg-12 bg-light p-3 mb-2">
+                        
+                      </div>
+                      
+                    </div>
+
+                  </div>
+                  <div class="col-lg-6 p-0">
+
+                    <div class="row">
+                      <div class="col-lg-6">
+
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <p>Economy</p>
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                          
+                        </div>
+
+                      </div>
+                      
+                      <div class="col-lg-6">
+
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <p>Premium Economy</p>
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                          <div class="col-lg-12 bg-light p-3 mb-2">
+                            
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+        </div>
+
+      </div>
+        
+    </div>
+  </div>
+
     
 
     
@@ -212,6 +548,7 @@ export default {
   },
   data () {
     return {
+      destCountryName: '',
       leavingName: "",
       destinationName: '',
       leavingCity: '',
@@ -223,7 +560,13 @@ export default {
       dates: {
         in: null,
         out: null
-      }
+      },
+      destinationDate: '',
+      fetchedWeatherData: [],
+      leftTemp1: '',
+      leftTemp2: '',
+      leftTemp3: '',
+      leftTemp4: ''
     }
   },
   methods: {
@@ -278,6 +621,7 @@ export default {
         this.leavingCity = airport.city
         this.leavingIata = airport.iata
         this.airportLeavingData = []
+
     },
 
     setDestinationState(airport){
@@ -285,23 +629,106 @@ export default {
         this.destinationCity = airport.city
         this.destinationIata = airport.iata
         this.airportDestinationData = []
+
+        let countryName = airport.name.split(',')
+        this.destCountryName = countryName[0]
+        
     },
 
     checkIn(val) {
 
-      let checkInDate = val.toString()
+      if(val !== null){
+        console.log(val)
 
-      checkInDate = checkInDate.split(" ")
+        let checkInDate = val.toString()
 
-      this.dates.in = `${checkInDate[2]} ${checkInDate[1]} ${checkInDate[3]}`;
+        checkInDate = checkInDate.split(" ")
+
+        this.dates.in = `${checkInDate[2]} ${checkInDate[1]} ${checkInDate[3]}`;
+      }
+
     },
 
     checkOut(val) {
-      let checkOutDate = val.toString()
 
-      checkOutDate = checkOutDate.split(" ")
-     
-      this.dates.out = `${checkOutDate[2]} ${checkOutDate[1]} ${checkOutDate[3]}`;
+      if(val !== null){
+        let checkOutDate = val.toString()
+
+        checkOutDate = checkOutDate.split(" ")
+      
+        this.dates.out = `${checkOutDate[2]} ${checkOutDate[1]} ${checkOutDate[3]}`;
+
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let monthIndex = months.indexOf(checkOutDate[1]);
+
+        this.destinationDate = `${checkOutDate[3]}-${monthIndex+1}-${checkOutDate[2]}`
+
+      }
+      
+    },
+
+    fetchWeatherData(){
+      axios.get(`https://api.weatherapi.com/v1/forecast.json?key=7361d83e5f7f4a219e6121225212812&q=${this.destinationCity}&dt=${this.destinationDate}`)
+        .then(result => {
+
+          // this.fetchedWeatherData = result.data
+          // console.log(this.fetchedWeatherData)
+          let weatherData = result.data
+          console.log(weatherData)
+
+          let sum1, sum2, sum3, sum4
+          sum1 = sum2 = sum3 = sum4 = 0
+          let temp_c_1, temp_c_2, temp_c_3, temp_c_4
+          temp_c_1 = temp_c_2 = temp_c_3 = temp_c_4 = []
+
+          for(let i=0;i<weatherData.forecast.forecastday[0].hour.length;i++){
+            
+            if(i>=0 && i<6){
+              temp_c_1 = [...temp_c_1, weatherData.forecast.forecastday[0].hour[i].temp_c]
+
+            }
+            else if(i>=6 && i<12){
+              temp_c_2 = [...temp_c_2, weatherData.forecast.forecastday[0].hour[i].temp_c]
+            }
+            else if(i>=12 && i<18){
+              temp_c_3 = [...temp_c_3, weatherData.forecast.forecastday[0].hour[i].temp_c]
+            }
+            else if(i>=18 && i<24){
+              temp_c_4 = [...temp_c_4, weatherData.forecast.forecastday[0].hour[i].temp_c]
+            }
+          }
+
+          sum1 = temp_c_1.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum2 = temp_c_2.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum3 = temp_c_3.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum4 = temp_c_4.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          
+
+          this.leftTemp1 = (sum1/6).toFixed(2)
+          this.leftTemp2 = (sum2/6).toFixed(2)
+          this.leftTemp3 = (sum3/6).toFixed(2)
+          this.leftTemp4 = (sum4/6).toFixed(2)
+
+          console.log(this.leftTemp1)
+          console.log(this.leftTemp2)
+          console.log(this.leftTemp3)
+          console.log(this.leftTemp4)
+
+      }).catch(err =>{
+        console.log(err)
+      })
     }
   }
 }
