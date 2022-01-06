@@ -68,7 +68,7 @@
                         <label style="color: #6EA1B3">Redeem Flights</label><label style="margin-left: 40px; color: #6EA1B3">Multi-city / stopover</label> 
                     </div>
                     <div class="col-lg-12">
-                        <div class="row" style="box-shadow: 5px 10px 18px #888888;">
+                        <div class="row mb-4" style="box-shadow: 5px 10px 18px #888888;">
                             <div @click="leavingInputCheck()" style="height: 200px; cursor: pointer" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <p>Leaving from</p>
                                 <h1>{{leavingIata}}</h1>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-12 p-0 mt-3">
+                    <!-- <div class="col-lg-12 p-0 mt-3">
                         <li class="nav-item nav-link dropdown">
                             <a style="color: black; text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" href="#">Return
                             <span class="caret"></span></a>
@@ -107,7 +107,7 @@
                             
                         </li>
                        
-                    </div>
+                    </div> -->
                     
                 </div>
                 <div class="row mt-5 text-light" style="background-color: #005E64; height: auto; border-radius: 3px">
