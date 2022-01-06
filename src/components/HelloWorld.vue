@@ -782,7 +782,7 @@ export default {
 
       this.bottomDiv = true
 
-      var options = {
+      let options = {
           method: 'GET',
           url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
           params: {q: this.destinationCity, days: '14', dt: this.destinationDate},
@@ -874,7 +874,7 @@ export default {
     },
 
     fetchLeavingWeatherData(){
-      var options = {
+      let options = {
           method: 'GET',
           url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
           params: {q: this.leavingCity, days: '14', dt: this.leavingDate},
