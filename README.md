@@ -30,10 +30,14 @@ npm run dev
 ### Step 1:
 Select the departure and destination.
 
+![1](https://user-images.githubusercontent.com/56860950/148437083-bfb43821-5dd4-4d11-895d-3007854117ec.png)
+
 ### Step 2:
 Select the departure and destination date and click on the Seach flights button.
+
+![2](https://user-images.githubusercontent.com/56860950/148437184-8a2261a2-af16-4409-8efe-b5d89e9bd255.png)
 
 ### Step 3:
 After clicking the button, a lower details portion will be shown which contains the weather forecast data.
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+![3](https://user-images.githubusercontent.com/56860950/148437248-8691703e-d6ce-4627-b487-ddab237b48f2.png)
