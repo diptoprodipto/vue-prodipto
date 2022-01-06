@@ -884,7 +884,7 @@ export default {
         };
 
         axios.request(options).then((response) => {
-          
+
           let weatherData = response.data
           let sum1, sum2, sum3, sum4, rainSum1, rainSum2, rainSum3, rainSum4
           sum1 = sum2 = sum3 = sum4 = rainSum1 = rainSum2 = rainSum3 = rainSum4 = 0
