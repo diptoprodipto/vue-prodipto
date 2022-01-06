@@ -69,12 +69,12 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="row" style="box-shadow: 5px 10px 18px #888888;">
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div @click="leavingInputCheck()" style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <p>Leaving from</p>
                                 <h1>{{leavingIata}}</h1>
                                 <h4>{{leavingCity}}</h4>
                             </div>
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div @click="destinationInputCheck()" style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
 
                                 <p>Going to</p>
                                 <h1>{{destinationIata}}</h1>
@@ -88,7 +88,7 @@
                                 <p>Returning on</p>
                                 <h6>{{dates.out}}</h6>
                             </div>
-                            <div style="height: 200px; background-color: #005E64;" @click="fetchWeatherData(); fetchLeavingWeatherData()" class="col-lg-3 border border-right-primary p-4 d-flex flex-column align-items-center justify-content-center text-light" data-bs-toggle="modal" data-bs-target="#weatherModal">
+                            <div style="height: 200px; background-color: #005E64; cursor: pointer" @click="fetchWeatherData(); fetchLeavingWeatherData()" class="col-lg-3 border border-right-primary p-4 d-flex flex-column align-items-center justify-content-center text-light" data-bs-toggle="modal" data-bs-target="#weatherModal">
 
                                 <h4>Search flights</h4>
                             </div>
@@ -154,10 +154,10 @@
         <!-- Modal body -->
         <div class="modal-body">
           <label for="leavingInput" class="form-label">LEAVING FROM</label>
-          <input type="text" class="form-control" id="leavingInput" v-model="leavingName" @input="getLeavingData"/>
+          <input :disabled="destinationInput"  type="text" class="form-control" id="leavingInput" v-model="leavingName" @input="getLeavingData"/>
           <br/>
           <label for="goingInput" class="form-label">Going to</label>
-          <input type="text" class="form-control" id="goingInput" v-model="destinationName" @input="getDestinationData"/>
+          <input :disabled="leavingInput"  type="text" class="form-control" id="goingInput" v-model="destinationName" @input="getDestinationData"/>
         </div>
 
         <div class="modal-footer">
@@ -668,7 +668,9 @@ export default {
       rightRain1: '',
       rightRain2: '',
       rightRain3: '',
-      rightRain4: ''
+      rightRain4: '',
+      leavingInput: true,
+      destinationInput: true
     }
   },
   methods: {
@@ -961,6 +963,16 @@ export default {
         }).catch ((error) => {
           console.error(error);
         });
+    },
+
+    leavingInputCheck(){
+      this.leavingInput = true
+      this.destinationInput = false
+    },
+
+    destinationInputCheck(){
+      this.leavingInput = false
+      this.destinationInput = true
     }
   }
 }
