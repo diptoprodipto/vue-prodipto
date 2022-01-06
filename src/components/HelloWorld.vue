@@ -58,8 +58,11 @@
         <div class="row">
             <div class="col-lg-8 mb-3">
                 
-                
                 <div class="row bg-light p-4" style="height: auto">
+
+                  <p class="p-0" style="font-weight: bold">Flights</p>
+
+                  <hr>
 
                     <div class="col-lg-12 p-0 mb-3">
                         <label style="color: #6EA1B3">Redeem Flights</label><label style="margin-left: 40px; color: #6EA1B3">Multi-city / stopover</label> 
@@ -85,7 +88,7 @@
                                 <p>Returning on</p>
                                 <h6>{{dates.out}}</h6>
                             </div>
-                            <div style="height: 200px; background-color: #005E64;" @click="fetchWeatherData" class="col-lg-3 border border-right-primary p-4 d-flex flex-column align-items-center justify-content-center text-light" data-bs-toggle="modal" data-bs-target="#weatherModal">
+                            <div style="height: 200px; background-color: #005E64;" @click="fetchWeatherData(); fetchLeavingWeatherData()" class="col-lg-3 border border-right-primary p-4 d-flex flex-column align-items-center justify-content-center text-light" data-bs-toggle="modal" data-bs-target="#weatherModal">
 
                                 <h4>Search flights</h4>
                             </div>
@@ -93,7 +96,7 @@
                     </div>
 
                     <div class="col-lg-12 p-0 mt-3">
-                      <li class="nav-item nav-link dropdown">
+                        <li class="nav-item nav-link dropdown">
                             <a style="color: black; text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" href="#">Return
                             <span class="caret"></span></a>
                             
@@ -157,6 +160,10 @@
           <input type="text" class="form-control" id="goingInput" v-model="destinationName" @input="getDestinationData"/>
         </div>
 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Done</button>
+        </div>
+
         <div v-if="airportLeavingData.length > 0">
               <div @click="setState(airport)" class="p-2" style="background-color: white; border-radius: 3px; border: 1px gray solid;" v-for="airport in airportLeavingData" :key="airport.id">
                   <p>{{airport.city}} - {{airport.name}}</p>
@@ -201,41 +208,52 @@
             
         </div>
 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Done</button>
+        </div>
+
       </div>
         
     </div>
   </div>
 
-  <div class="modal fade" id="weatherModal"> 
-    <div class="modal-dialog" style="max-width: 99%;" role="document">
-      <div class="modal-content ml-0">
+  <div v-if="bottomDiv"> 
+    <div> <!---  class="modal-dialog" style="max-width: 99%;" role="document" -->
+      <div>
 
-        <div class="modal-header">
-            <p>Select departing flight</p>
+        <div>
+
+            <div class="p-2 bg-light">
+              <p style="font-weight: bold; color: red">Select departing flight</p>
+              <p><b>{{leavingCity}}</b> to <b>{{destinationCity}}</b></p>
+              <p>Date: <b>{{dates.in}}</b></p>
+            </div>
             
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
 
-        <div class="modal-body">
-            <p>{{leavingCity}} to {{destinationCity}}</p>
-
-            <div class="row">
+            <div class="row p-4">
               <div class="col-lg-6" style="border-right: 1px black solid">
 
-                <div class="row" style="border-right: 1px black solid">
+                <div class="row">
+                  <div class="col-lg-12 p-0">
+                    <p>Date: <b>{{dates.in}}</b></p>
+                    <p>Forecast for: <b>{{leavingCity}}</b></p>
+                  </div>
+                </div>
 
-                  <div  class="col-lg-3 bg-danger p-0">
+                <div class="row">
+
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
                             
                             <div class="d-flex flex-column text-center mt-5 mb-4">
                               <h5 class="mb-1">Morning</h5>
                               <h3 class="mb-1 mt-3">{{leftTemp1}} °C</h3>
-                              <i class="bi bi-sun" style="color: #868B94; font-size: 50px"></i>
-                            
+                              <i class="bi bi-cloud-sun-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{leftRain1}}%</h6>
                             </div>
 
                             
@@ -245,18 +263,18 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0">
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
                             
                             <div class="d-flex flex-column text-center mt-5 mb-4">
                               <h5 class="mb-1">Afternoon</h5>
                               <h3 class="mb-1 mt-3">{{leftTemp2}} °C</h3>
-                              <i class="bi bi-cloud" style="color: #868B94; font-size: 50px"></i>
-                            
+                              <i class="bi bi-cloud-rain" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{leftRain2}}%</h6>
                             </div>
 
                             
@@ -266,18 +284,18 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0" >
+                  <div  class="col-lg-3 p-0" >
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
                             
                             <div class="d-flex flex-column text-center mt-5 mb-4">
                               <h5 class="mb-1">Evening</h5>
                               <h3 class="mb-1 mt-3">{{leftTemp3}} °C</h3>
-                              <i class="bi bi-moon" style="color: #868B94; font-size: 50px"></i>
-                            
+                              <i class="bi bi-cloud-moon-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{leftRain3}}%</h6>
                             </div>
 
                             
@@ -287,18 +305,18 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0">
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
                             
                             <div class="d-flex flex-column text-center mt-5 mb-4">
                               <h5 class="mb-1">Overnight</h5>
                               <h3 class="mb-1 mt-3">{{leftTemp4}} °C</h3>
-                              <i class="bi bi-moon" style="color: #868B94; font-size: 50px"></i>
-                            
+                              <i class="bi bi-cloud-moon-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{leftRain4}}%</h6>
                             </div>
 
                           </div>
@@ -315,34 +333,26 @@
               <div class="col-lg-6">
 
                 <div class="row">
+                  <div class="col-lg-12">
+                    <p>Date: <b>{{dates.out}}</b></p>
+                    <p>Forecast for: <b>{{destinationCity}}</b></p>
+                  </div>
+                </div>
 
-                  <div  class="col-lg-3 bg-danger p-0">
+                <div class="row">
+
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
-                            <div class="d-flex">
-                              <h6 class="flex-grow-1">12:00 am</h6>
-                              <h6>6:00 am</h6>
-                            </div>
                             <div class="d-flex flex-column text-center mt-5 mb-4">
-                              <h2 class="mb-1">London</h2>
-                              <h5 class="mb-4">2021-12-26</h5>
-                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
-                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
+                              <h5 class="mb-1">Morning</h5>
+                              <h3 class="mb-1 mt-3">{{rightTemp1}} °C</h3>
+                              <i class="bi bi-cloud-sun-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{rightRain1}}%</h6>
                             
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                              <div class="flex-grow-1" style="font-size: 1rem;">
-                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
-                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
-                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
-                              </div>
-                              <div>
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -350,33 +360,17 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0">
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
-                            <div class="d-flex">
-                              <h6 class="flex-grow-1">12:00 am</h6>
-                              <h6>6:00 am</h6>
-                            </div>
                             <div class="d-flex flex-column text-center mt-5 mb-4">
-                              <h2 class="mb-1">London</h2>
-                              <h5 class="mb-4">2021-12-26</h5>
-                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
-                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
-                            
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                              <div class="flex-grow-1" style="font-size: 1rem;">
-                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
-                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
-                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
-                              </div>
-                              <div>
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
-                              </div>
+                              <h5 class="mb-1">Afternoon</h5>
+                              <h3 class="mb-1 mt-3">{{rightTemp2}} °C</h3>
+                              <i class="bi bi-cloud-rain" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{rightRain2}}%</h6>
                             </div>
                           </div>
                         </div>
@@ -384,33 +378,17 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0" >
+                  <div  class="col-lg-3 p-0" >
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
-                            <div class="d-flex">
-                              <h6 class="flex-grow-1">12:00 am</h6>
-                              <h6>6:00 am</h6>
-                            </div>
                             <div class="d-flex flex-column text-center mt-5 mb-4">
-                              <h2 class="mb-1">London</h2>
-                              <h5 class="mb-4">2021-12-26</h5>
-                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
-                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
-                            
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                              <div class="flex-grow-1" style="font-size: 1rem;">
-                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
-                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
-                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
-                              </div>
-                              <div>
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
-                              </div>
+                              <h5 class="mb-1">Evening</h5>
+                              <h3 class="mb-1 mt-3">{{rightTemp3}} °C</h3>
+                              <i class="bi bi-cloud-moon-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{rightRain3}}%</h6>
                             </div>
                           </div>
                         </div>
@@ -418,33 +396,17 @@
                     </section>
 
                   </div>
-                  <div  class="col-lg-3 bg-danger p-0">
+                  <div  class="col-lg-3 p-0">
 
                     <section class="h-auto">
-                      <div class="">
+                      <div>
                         <div class="card" style="color: #4B515D;">
                           <div class="card-body">
-                            <div class="d-flex">
-                              <h6 class="flex-grow-1">12:00 am</h6>
-                              <h6>6:00 am</h6>
-                            </div>
                             <div class="d-flex flex-column text-center mt-5 mb-4">
-                              <h2 class="mb-1">London</h2>
-                              <h5 class="mb-4">2021-12-26</h5>
-                              <h5 id="degreec1" class="mb-0 font-weight-bold" style="color: #1C2331;"> High 13°C - Low 13°C</h5>
-                              <h5 id="degreef1" class="mb-0 font-weight-bold" style="color: #1C2331; display: none;"> High 13°F - Low 13°F </h5>
-                            
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                              <div class="flex-grow-1" style="font-size: 1rem;">
-                                <div><i class="bi bi-wind" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h </span></div>
-                                <div><i class="bi bi-water" style="color: #868B94;"></i> <span class="ms-1"> 84% </span></div>
-                                <!-- <div><i class="bi bi-sun" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span></div> -->
-                              </div>
-                              <div>
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp" width="100px">
-                              </div>
+                              <h5 class="mb-1">Overnight</h5>
+                              <h3 class="mb-1 mt-3">{{rightTemp4}} °C</h3>
+                              <i class="bi bi-cloud-moon-fill" style="color: #868B94; font-size: 50px"></i>
+                              <h6 class="mb-1 mt-2">{{rightRain4}}%</h6>
                             </div>
                           </div>
                         </div>
@@ -458,70 +420,177 @@
               
             </div>
 
-            <div class="row p-3 mt-5 bg-secondary">
+            <div class="row p-3 mt-5">
 
-              <div class="col-lg-12 p-0">
-                <p>Sort by</p>
+              <div class="col-lg-12 p-1">
+                <div class="row no-gutters">
+
+                  <div class="col-lg-6">
+                    <div class="row">
+                    <div class="col-lg-2 col-md-6">
+                        <p style="color:black ;font-size:14px;">Sort by: </p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                     
+                      <p style="color: blue ;font-size:14px;">Recommended</p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        
+                        <p style="color: blue ;font-size:14px;">Departure time</p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        
+                        <p style="color: blue ;font-size:14px;">Arrival time </p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        
+                        <p style="color: blue ;font-size:14px;">Duration</p>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                      
+                        <p style="color: blue ;font-size:14px;">Fare</p>
+                    </div>
+                    
+                    </div>
+                  </div>
+                  
+                </div>
               </div>
 
               <div class="col-lg-12">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 p-3">
 
                     <div class="row">
                       <div class="col-lg-12 p-0">
-                        <p>5 flights found</p>
+                        <p>3 flights found</p>
                       </div>
                       <div class="col-lg-12 bg-light p-3 mb-2">
+
+                        <div class="row">
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{jsonData.st.start}}</h2>
+                            <h6>{{leavingIata}}</h6>
+
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            <h6>{{jsonData.st.duration}}</h6>
+                            <h6>LAX</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{ jsonData.st.end }}</h2>
+                            <h6>{{destinationIata}}</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            <h6>CX880 <i class="bi bi-chevron-right"></i> CX7906</h6>
+                          </div>
+                        </div>
                         
                       </div>
                       <div class="col-lg-12 bg-light p-3 mb-2">
+
+                        <div class="row">
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{ jsonData.nd.start }}</h2>
+                            <h6>{{leavingIata}}</h6>
+
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            <h6>{{jsonData.nd.duration}}</h6>
+                            <h6>LAX</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{ jsonData.nd.end }}</h2>
+                            <h6>{{destinationIata}}</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            <h6>CX880 <i class="bi bi-chevron-right"></i> AA2002</h6>
+                          </div>
+                        </div>
                         
                       </div>
                       <div class="col-lg-12 bg-light p-3 mb-2">
+
+                        <div class="row">
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{ jsonData.rd.start }}</h2>
+                            <h6>{{leavingIata}}</h6>
+
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            
+                            <h6>{{ jsonData.rd.duration }}</h6>
+                            <h6>LAX</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+
+                            <h2>{{ jsonData.rd.end }}</h2>
+                            <h6>{{destinationIata}}</h6>
+                            
+                          </div>
+                          <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                            <h6>CX880 <i class="bi bi-chevron-right"></i> AA2475</h6>
+                          </div>
+                        </div>
                         
                       </div>
                       
                     </div>
 
                   </div>
-                  <div class="col-lg-6 p-0">
+                  <div class="col-lg-6">
 
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 p-3">
 
-                        <div class="row">
-                          <div class="col-lg-12">
+                        <div class="row ml-4">
+                          <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center text-light" style="background-color: #005E64">
                             <p>Economy</p>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.economy.price1 }}</h2>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.economy.price2 }}</h2>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.economy.price3 }}</h2>
                           </div>
                           
                         </div>
 
                       </div>
                       
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 p-3">
 
                         <div class="row">
-                          <div class="col-lg-12">
+                          <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center text-light" style="background-color: #005E64">
                             <p>Premium Economy</p>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.premium.price1 }}</h2>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.premium.price2 }}</h2>
                           </div>
-                          <div class="col-lg-12 bg-light p-3 mb-2">
-                            
+                          <div style="border-top: 2px #005E64 solid; " class="col-lg-12 bg-light p-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+                            <label>From</label>
+                            <h2>{{leavingIata}}{{ jsonData.premium.price3 }}</h2>
                           </div>
                         </div>
                         
@@ -548,17 +617,16 @@
     
   </div>
 
-  
-  
 
 </template>
 
 <script>
 
+
 import axios from "axios";
 import HotelDatePicker from 'vue-hotel-datepicker'
 import 'vue-hotel-datepicker/dist/vueHotelDatepicker.css';
-
+import jsonData from './data.json'
 
 export default {
   name: 'HelloWorld',
@@ -581,11 +649,26 @@ export default {
         out: 'Select'
       },
       destinationDate: '',
+      leavingDate: '',
       fetchedWeatherData: [],
       leftTemp1: '',
       leftTemp2: '',
       leftTemp3: '',
-      leftTemp4: ''
+      leftTemp4: '',
+      rightTemp1: '',
+      rightTemp2: '',
+      rightTemp3: '',
+      rightTemp4: '',
+      jsonData: jsonData,
+      bottomDiv: false,
+      leftRain1: '',
+      leftRain2: '',
+      leftRain3: '',
+      leftRain4: '',
+      rightRain1: '',
+      rightRain2: '',
+      rightRain3: '',
+      rightRain4: ''
     }
   },
   methods: {
@@ -664,6 +747,11 @@ export default {
         checkInDate = checkInDate.split(" ")
 
         this.dates.in = `${checkInDate[2]} ${checkInDate[1]} ${checkInDate[3]}`;
+
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let monthIndex = months.indexOf(checkInDate[1]);
+
+        this.leavingDate = `${checkInDate[3]}-${monthIndex+1}-${checkInDate[2]}`
       }
 
     },
@@ -677,6 +765,8 @@ export default {
       
         this.dates.out = `${checkOutDate[2]} ${checkOutDate[1]} ${checkOutDate[3]}`;
 
+        console.log(checkOutDate)
+
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let monthIndex = months.indexOf(checkOutDate[1]);
 
@@ -687,33 +777,45 @@ export default {
     },
 
     fetchWeatherData(){
-      axios.get(`https://api.weatherapi.com/v1/forecast.json?key=7361d83e5f7f4a219e6121225212812&q=${this.destinationCity}&dt=${this.destinationDate}`)
-        .then(result => {
 
-          // this.fetchedWeatherData = result.data
-          // console.log(this.fetchedWeatherData)
-          let weatherData = result.data
-          console.log(weatherData)
+      this.bottomDiv = true
 
-          let sum1, sum2, sum3, sum4
-          sum1 = sum2 = sum3 = sum4 = 0
-          let temp_c_1, temp_c_2, temp_c_3, temp_c_4
-          temp_c_1 = temp_c_2 = temp_c_3 = temp_c_4 = []
+      var options = {
+          method: 'GET',
+          url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
+          params: {q: this.destinationCity, days: '14', dt: this.destinationDate},
+          headers: {
+            'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
+            'x-rapidapi-key': 'e3b89510f8mshc7703596d4ae869p189756jsn4bcc816aea37'
+          }
+        };
+
+        axios.request(options).then((response) => {
+          let weatherData = response.data
+          let sum1, sum2, sum3, sum4, rainSum1, rainSum2, rainSum3, rainSum4
+          sum1 = sum2 = sum3 = sum4 = rainSum1 = rainSum2 = rainSum3 = rainSum4 = 0
+          let temp_c_1, temp_c_2, temp_c_3, temp_c_4, rain1, rain2, rain3, rain4
+          temp_c_1 = temp_c_2 = temp_c_3 = temp_c_4 = rain1 = rain2 = rain3 = rain4 = []
 
           for(let i=0;i<weatherData.forecast.forecastday[0].hour.length;i++){
             
             if(i>=0 && i<6){
               temp_c_1 = [...temp_c_1, weatherData.forecast.forecastday[0].hour[i].temp_c]
 
+              rain1 = [...rain1, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
+
             }
             else if(i>=6 && i<12){
               temp_c_2 = [...temp_c_2, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain2 = [...rain2, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
             }
             else if(i>=12 && i<18){
               temp_c_3 = [...temp_c_3, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain3 = [...rain3, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
             }
             else if(i>=18 && i<24){
               temp_c_4 = [...temp_c_4, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain4 = [...rain4, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
             }
           }
 
@@ -733,6 +835,115 @@ export default {
                   return acc + curr;
           });
 
+          rainSum1 = rain1.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum2 = rain2.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum3 = rain3.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum4 = rain4.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          
+
+          this.rightTemp1 = (sum1/6).toFixed(2)
+          this.rightTemp2 = (sum2/6).toFixed(2)
+          this.rightTemp3 = (sum3/6).toFixed(2)
+          this.rightTemp4 = (sum4/6).toFixed(2)
+
+
+          this.rightRain1 = Math.round(rainSum1/6)
+          this.rightRain2 = Math.round(rainSum2/6)
+          this.rightRain3 = Math.round(rainSum3/6)
+          this.rightRain4 = Math.round(rainSum4/6)
+
+
+        }).catch ((error) => {
+          console.error(error);
+        });
+
+    },
+
+    fetchLeavingWeatherData(){
+      var options = {
+          method: 'GET',
+          url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
+          params: {q: this.leavingCity, days: '14', dt: this.leavingDate},
+          headers: {
+            'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
+            'x-rapidapi-key': 'e3b89510f8mshc7703596d4ae869p189756jsn4bcc816aea37'
+          }
+        };
+
+        axios.request(options).then((response) => {
+          console.log(response.data)
+          let weatherData = response.data
+          let sum1, sum2, sum3, sum4, rainSum1, rainSum2, rainSum3, rainSum4
+          sum1 = sum2 = sum3 = sum4 = rainSum1 = rainSum2 = rainSum3 = rainSum4 = 0
+          let temp_c_1, temp_c_2, temp_c_3, temp_c_4, rain1, rain2, rain3, rain4
+          temp_c_1 = temp_c_2 = temp_c_3 = temp_c_4 = rain1 = rain2 = rain3 = rain4 = []
+
+          for(let i=0;i<weatherData.forecast.forecastday[0].hour.length;i++){
+            
+            if(i>=0 && i<6){
+              temp_c_1 = [...temp_c_1, weatherData.forecast.forecastday[0].hour[i].temp_c]
+
+              rain1 = [...rain1, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
+
+            }
+            else if(i>=6 && i<12){
+              temp_c_2 = [...temp_c_2, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain2 = [...rain2, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
+            }
+            else if(i>=12 && i<18){
+              temp_c_3 = [...temp_c_3, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain3 = [...rain3, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
+            }
+            else if(i>=18 && i<24){
+              temp_c_4 = [...temp_c_4, weatherData.forecast.forecastday[0].hour[i].temp_c]
+              rain4 = [...rain4, weatherData.forecast.forecastday[0].hour[i].chance_of_rain]
+            }
+          }
+
+          sum1 = temp_c_1.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum2 = temp_c_2.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum3 = temp_c_3.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          sum4 = temp_c_4.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum1 = rain1.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum2 = rain2.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum3 = rain3.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
+          rainSum4 = rain4.reduce((acc, curr) => {
+                  return acc + curr;
+          });
+
           
 
           this.leftTemp1 = (sum1/6).toFixed(2)
@@ -740,14 +951,16 @@ export default {
           this.leftTemp3 = (sum3/6).toFixed(2)
           this.leftTemp4 = (sum4/6).toFixed(2)
 
-          console.log(this.leftTemp1)
-          console.log(this.leftTemp2)
-          console.log(this.leftTemp3)
-          console.log(this.leftTemp4)
 
-      }).catch(err =>{
-        console.log(err)
-      })
+          this.leftRain1 = Math.round(rainSum1/6)
+          this.leftRain2 = Math.round(rainSum2/6)
+          this.leftRain3 = Math.round(rainSum3/6)
+          this.leftRain4 = Math.round(rainSum4/6)
+
+
+        }).catch ((error) => {
+          console.error(error);
+        });
     }
   }
 }

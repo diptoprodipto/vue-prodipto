@@ -1,0 +1,35 @@
+{
+  "date": "2022-01-08",
+  "place": "China",
+  "economy": {
+    "from": "Dhaka",
+    "fare": "800$",
+    "time": "",
+    "price1": "D12,524",
+    "price2": "D16,378",
+    "price3": "D16,378"
+  },
+  "premium": {
+    "from": "",
+    "fare": "",
+    "time": "",
+    "price1": "D19,804",
+    "price2": "D21,578",
+    "price3": "D21,578"
+  },
+  "st": {
+    "start": "00:15",
+    "end": "00:50",
+    "duration": "16h 35m"
+  },
+  "nd": {
+    "start": "00:15",
+    "end": "08:26",
+    "duration": "24h 11m"
+  },
+  "rd": {
+    "start": "00:15",
+    "end": "12:02",
+    "duration": "27h 47m"
+  }
+}
