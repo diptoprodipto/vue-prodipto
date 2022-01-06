@@ -240,7 +240,7 @@
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="box-shadow: 5px 10px 18px #888888;">
 
                   <div  class="col-lg-3 p-0">
 
@@ -339,7 +339,7 @@
                   </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="box-shadow: 5px 10px 18px #888888;">
 
                   <div  class="col-lg-3 p-0">
 
