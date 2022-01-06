@@ -161,17 +161,18 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Done</button>
+          <button @click="resetForm()" type="button" class="btn btn-danger">Reset</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
         </div>
 
         <div style="cursor: pointer" v-if="airportLeavingData.length > 0">
-              <div @click="setState(airport)" class="p-2" style="background-color: white; border-radius: 3px; border: 1px gray solid;" v-for="airport in airportLeavingData" :key="airport.id">
+              <div @click="setState(airport)" class="p-2 suggestionDiv" style="border-radius: 3px; border: 1px gray solid;" v-for="airport in airportLeavingData" :key="airport.id">
                   <p>{{airport.city}} - {{airport.name}}</p>
               </div>
         </div>
 
         <div style="cursor: pointer" v-if="airportDestinationData.length > 0">
-              <div @click="setDestinationState(airport)" class="p-2" style="background-color: white; border-radius: 3px; border: 1px gray solid;" v-for="airport in airportDestinationData" :key="airport.id">
+              <div @click="setDestinationState(airport)" class="p-2 suggestionDiv" style="border-radius: 3px; border: 1px gray solid;" v-for="airport in airportDestinationData" :key="airport.id">
                   <p>{{airport.city}} - {{airport.name}}</p>
               </div>
         </div>
@@ -209,7 +210,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Done</button>
+          <button @click="resetCalendar()" type="button" class="btn btn-danger">Reset</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
         </div>
 
       </div>
@@ -973,6 +975,20 @@ export default {
     destinationInputCheck(){
       this.leavingInput = false
       this.destinationInput = true
+    },
+
+    resetForm(){
+      this.leavingName = ''
+      this.leavingCity = 'Select'
+      this.leavingIata = 'Select'
+      this.destinationName = ''
+      this.destinationCity = 'Select'
+      this.destinationIata = 'Select'
+    },
+
+    resetCalendar(){
+      this.dates.in = 'Select'
+      this.dates.out = 'Select'
     }
   }
 }
@@ -993,5 +1009,10 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.suggestionDiv:hover{
+  background: #005E64;
+  color: white;
 }
 </style>
