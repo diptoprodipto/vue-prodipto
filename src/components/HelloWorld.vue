@@ -148,7 +148,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Select a departure/destination city</h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button @click="suggestionOff()" type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
         <!-- Modal body -->
@@ -162,7 +162,7 @@
 
         <div class="modal-footer">
           <button @click="resetForm()" type="button" class="btn btn-danger">Reset</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+          <button @click="suggestionOff()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
         </div>
 
         <div style="cursor: pointer" v-if="airportLeavingData.length > 0">
@@ -686,7 +686,7 @@ export default {
             
         }
         
-        if(this.leavingName.length !== 0){
+        else if(this.leavingName.length !== 0){
             axios.get("https://api.sharetrip.net/api/v1/flight/search/airport?name=" + this.leavingName)
             .then(res => {
                 this.airportLeavingData = []
@@ -707,7 +707,7 @@ export default {
             
         }
         
-        if(this.destinationName.length !== 0){
+        else if(this.destinationName.length !== 0){
             axios.get("https://api.sharetrip.net/api/v1/flight/search/airport?name=" + this.destinationName)
             .then(res => {
                 console.log(res.data.response)
@@ -989,6 +989,11 @@ export default {
     resetCalendar(){
       this.dates.in = 'Select'
       this.dates.out = 'Select'
+    },
+
+    suggestionOff(){
+      this.airportLeavingData = []
+      this.airportLeavingData = []
     }
   }
 }
