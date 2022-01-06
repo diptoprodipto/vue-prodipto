@@ -855,10 +855,10 @@ export default {
 
           
 
-          this.rightTemp1 = (sum1/6).toFixed(2)
-          this.rightTemp2 = (sum2/6).toFixed(2)
-          this.rightTemp3 = (sum3/6).toFixed(2)
-          this.rightTemp4 = (sum4/6).toFixed(2)
+          this.rightTemp1 = Math.round(sum1/6)
+          this.rightTemp2 = Math.round(sum2/6)
+          this.rightTemp3 = Math.round(sum3/6)
+          this.rightTemp4 = Math.round(sum4/6)
 
 
           this.rightRain1 = Math.round(rainSum1/6)
@@ -948,10 +948,10 @@ export default {
 
           
 
-          this.leftTemp1 = (sum1/6).toFixed(2)
-          this.leftTemp2 = (sum2/6).toFixed(2)
-          this.leftTemp3 = (sum3/6).toFixed(2)
-          this.leftTemp4 = (sum4/6).toFixed(2)
+          this.leftTemp1 = Math.round(sum1/6)
+          this.leftTemp2 = Math.round(sum2/6)
+          this.leftTemp3 = Math.round(sum3/6)
+          this.leftTemp4 = Math.round(sum4/6)
 
 
           this.leftRain1 = Math.round(rainSum1/6)
