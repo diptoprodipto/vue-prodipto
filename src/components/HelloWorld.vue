@@ -148,7 +148,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Select a departure/destination city</h4>
-          <button @click="suggestionOff()" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
         <!-- Modal body -->
@@ -162,7 +162,7 @@
 
         <div class="modal-footer">
           <button @click="resetForm()" type="button" class="btn btn-danger">Reset</button>
-          <button @click="suggestionOff()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
         </div>
 
         <div style="cursor: pointer" v-if="airportLeavingData.length > 0">
@@ -744,7 +744,6 @@ export default {
     checkIn(val) {
 
       if(val !== null){
-        console.log(val)
 
         let checkInDate = val.toString()
 
@@ -768,8 +767,6 @@ export default {
         checkOutDate = checkOutDate.split(" ")
       
         this.dates.out = `${checkOutDate[2]} ${checkOutDate[1]} ${checkOutDate[3]}`;
-
-        console.log(checkOutDate)
 
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let monthIndex = months.indexOf(checkOutDate[1]);
@@ -887,7 +884,7 @@ export default {
         };
 
         axios.request(options).then((response) => {
-          console.log(response.data)
+          
           let weatherData = response.data
           let sum1, sum2, sum3, sum4, rainSum1, rainSum2, rainSum3, rainSum4
           sum1 = sum2 = sum3 = sum4 = rainSum1 = rainSum2 = rainSum3 = rainSum4 = 0
@@ -989,11 +986,6 @@ export default {
     resetCalendar(){
       this.dates.in = 'Select'
       this.dates.out = 'Select'
-    },
-
-    suggestionOff(){
-      this.airportLeavingData = []
-      this.airportLeavingData = []
     }
   }
 }
