@@ -2,16 +2,6 @@
 
 > Vue.js assignment
 
-## Used tools
-- Vue.js
-- HTML
-- CSS
-- JavaScript
-
-## API used
-- https://rapidapi.com/weatherapi/api/weatherapi-com/
-- https://api.sharetrip.net/api/v1/flight/search/airport?name=Vancouver
-
 ## Installation
 
 - Clone the repo
@@ -25,6 +15,16 @@ npm install
 npm run dev
 
 ```
+
+## Used tools
+- Vue.js
+- HTML
+- CSS
+- JavaScript
+
+## API used
+- https://rapidapi.com/weatherapi/api/weatherapi-com/
+- https://api.sharetrip.net/api/v1/flight/search/airport?name=Vancouver
 
 ## Overview
 ### Step 1:
