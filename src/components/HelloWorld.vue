@@ -432,7 +432,7 @@
                     </div>
                     <div class="col-lg-2 col-md-6">
                      
-                      <p style="color: blue ;font-size:14px;">Recommended</p>
+                      <p style="color: black ;font-size:14px;">Recommended</p>
                     </div>
                     <div class="col-lg-2 col-md-6">
                         
