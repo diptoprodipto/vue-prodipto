@@ -69,18 +69,18 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="row" style="box-shadow: 5px 10px 18px #888888;">
-                            <div @click="leavingInputCheck()" style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div @click="leavingInputCheck()" style="height: 200px; cursor: pointer" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
                                 <p>Leaving from</p>
                                 <h1>{{leavingIata}}</h1>
                                 <h4>{{leavingCity}}</h4>
                             </div>
-                            <div @click="destinationInputCheck()" style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <div @click="destinationInputCheck()" style="height: 200px; cursor: pointer" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#myModal">
 
                                 <p>Going to</p>
                                 <h1>{{destinationIata}}</h1>
                                 <h4>{{destinationCity}}</h4>
                             </div>
-                            <div style="height: 200px" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#datePickerModal">
+                            <div style="height: 200px; cursor: pointer" class="col-lg-3 border border-right-primary p-4" data-bs-toggle="modal" data-bs-target="#datePickerModal">
 
                                 <p>Departing on</p>
                                 <h6>{{dates.in}}</h6>
@@ -154,23 +154,23 @@
         <!-- Modal body -->
         <div class="modal-body">
           <label for="leavingInput" class="form-label">LEAVING FROM</label>
-          <input :disabled="destinationInput"  type="text" class="form-control" id="leavingInput" v-model="leavingName" @input="getLeavingData"/>
+          <input autocomplete="off" :disabled="destinationInput"  type="text" class="form-control" id="leavingInput" v-model="leavingName" @input="getLeavingData"/>
           <br/>
           <label for="goingInput" class="form-label">Going to</label>
-          <input :disabled="leavingInput"  type="text" class="form-control" id="goingInput" v-model="destinationName" @input="getDestinationData"/>
+          <input autocomplete="off" :disabled="leavingInput"  type="text" class="form-control" id="goingInput" v-model="destinationName" @input="getDestinationData"/>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Done</button>
         </div>
 
-        <div v-if="airportLeavingData.length > 0">
+        <div style="cursor: pointer" v-if="airportLeavingData.length > 0">
               <div @click="setState(airport)" class="p-2" style="background-color: white; border-radius: 3px; border: 1px gray solid;" v-for="airport in airportLeavingData" :key="airport.id">
                   <p>{{airport.city}} - {{airport.name}}</p>
               </div>
         </div>
 
-        <div v-if="airportDestinationData.length > 0">
+        <div style="cursor: pointer" v-if="airportDestinationData.length > 0">
               <div @click="setDestinationState(airport)" class="p-2" style="background-color: white; border-radius: 3px; border: 1px gray solid;" v-for="airport in airportDestinationData" :key="airport.id">
                   <p>{{airport.city}} - {{airport.name}}</p>
               </div>
